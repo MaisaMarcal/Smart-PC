@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tecdes.smart.dto.ComputadorDTO;
+import com.tecdes.smart.service.ComputadorService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/computadores")

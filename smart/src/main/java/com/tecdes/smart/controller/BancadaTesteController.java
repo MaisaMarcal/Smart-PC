@@ -17,6 +17,8 @@ import com.tecdes.smart.dto.BancadaTesteDTO;
 import com.tecdes.smart.model.BancadaTeste;
 import com.tecdes.smart.service.BancadaTesteService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/bancadaTeste")
 @RequiredArgsConstructor 
