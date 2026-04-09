@@ -1,11 +1,14 @@
 package com.tecdes.smart.model;
 
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,25 +17,30 @@ public class BancadaTeste {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String dataHora;
+    @Column(nullable = true)
+    private LocalDateTime dataHoraSaida;
+    private LocalDateTime dataHoraEntrada;
 
-    @ManyToOne
-    @JoinColumn(name = "medico_id")
-    private Medico medico;
+    @Column(unique = true)
+    private Integer numero;
 
-    @ManyToOne
-    @JoinColumn(name = "paciente_id")
-    private Paciente paciente;
+    @OneToOne
+    @JoinColumn(name = "venda_id", unique = true)
+    private Venda venda;
 
-    public Consulta() {}
+    public BancadaTeste() {}
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-    public String getDataHora() { return dataHora; }
-    public void setDataHora(String dataHora) { this.dataHora = dataHora; }
-    public Medico getMedico() { return medico; }
-    public void setMedico(Medico medico) { this.medico = medico; }
-    public Paciente getPaciente() { return paciente; }
-    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
+    public LocalDateTime getDataHoraEntrada() { return dataHoraEntrada; }
+    public void setDataHoraEntrada(LocalDateTime dataHoraEntrada) { this.dataHoraEntrada = dataHoraEntrada; }
+    public LocalDateTime getDataHoraSaida() { return dataHoraSaida; }
+    public void setDataHoraSaida(LocalDateTime dataHoraSaida) { this.dataHoraSaida = dataHoraSaida; }
+    public Integer getNumero() { return numero; }
+    public void setNumero(Integer numero){ this.numero = numero ;}
+
+    public Venda getVenda() { return venda; }
+    public void setVenda(Venda venda) { this.venda = venda; }
+
 }
 
