@@ -25,6 +25,9 @@ public class Computador {
     @JoinColumn(name = "venda_id", unique = true)
     private Venda venda;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private String  CodigoVenda;
     public Computador() {}
 
     public Long getId() { return id; }
@@ -34,6 +37,10 @@ public class Computador {
 
     public Venda getVenda() { return venda; }
     public void setVenda(Venda venda) { this.venda = venda; }
+
+    
+    public CodigoVenda getCodigoVenda() { return CodigoVenda; }
+    public void setCodigoVenda(CodigoVenda CodigoVenda) { this.CodigoVenda = CodigoVenda; }
 
 }
 

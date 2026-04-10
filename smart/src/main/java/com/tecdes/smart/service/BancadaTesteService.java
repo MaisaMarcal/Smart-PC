@@ -22,32 +22,21 @@ public class BancadaTesteService {
         this.vendaRepository = vd;
     }
 
-  
+
     public BancadaTesteDTO criarBancada(BancadaTesteDTO dto) {
 
-
+     
         if (dto.vendaId() != null && bancadaTesteRepository.existsByVendaId(dto.vendaId())) {
             throw new RuntimeException("Venda já está em uma bancada");
         }
 
         BancadaTeste bancada = new BancadaTeste();
+        preencherDados(bancada, dto);
 
-        bancada.setNumero(dto.numero());
-        bancada.setDataHoraEntrada(dto.dataHoraEntrada());
-        bancada.setDataHoraSaida(dto.dataHoraSaida());
-
-        if (dto.vendaId() != null) {
-            Venda venda = vendaRepository.findById(dto.vendaId())
-                    .orElseThrow(() -> new RuntimeException("Venda não encontrada"));
-
-            bancada.setVenda(venda);
-        }
-
-        BancadaTeste salva = bancadaTesteRepository.save(bancada);
-
-        return converterParaDTO(salva);
+        return converterParaDTO(bancadaTesteRepository.save(bancada));
     }
 
+   
     public List<BancadaTesteDTO> listarBancadas() {
         return bancadaTesteRepository.findAll()
                 .stream()
@@ -63,10 +52,12 @@ public class BancadaTesteService {
         return converterParaDTO(bancada);
     }
 
+
     public BancadaTesteDTO atualizarBancadaPut(Long id, BancadaTesteDTO dto) {
 
         BancadaTeste bancada = bancadaTesteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Bancada não encontrada"));
+
 
         if (dto.vendaId() != null &&
             bancadaTesteRepository.existsByVendaId(dto.vendaId()) &&
@@ -74,6 +65,18 @@ public class BancadaTesteService {
 
             throw new RuntimeException("Venda já está em outra bancada");
         }
+
+        preencherDados(bancada, dto);
+
+        return converterParaDTO(bancadaTesteRepository.save(bancada));
+    }
+
+
+    public void excluirBancada(Long id) {
+        bancadaTesteRepository.deleteById(id);
+    }
+
+    private void preencherDados(BancadaTeste bancada, BancadaTesteDTO dto) {
 
         bancada.setNumero(dto.numero());
         bancada.setDataHoraEntrada(dto.dataHoraEntrada());
@@ -85,15 +88,10 @@ public class BancadaTesteService {
 
             bancada.setVenda(venda);
         } else {
-            bancada.setVenda(null); // libera a bancada
+            bancada.setVenda(null);
         }
-
-        return converterParaDTO(bancadaTesteRepository.save(bancada));
     }
 
-    public void excluirBancada(Long id) {
-        bancadaTesteRepository.deleteById(id);
-    }
 
     private BancadaTesteDTO converterParaDTO(BancadaTeste bt) {
         return new BancadaTesteDTO(

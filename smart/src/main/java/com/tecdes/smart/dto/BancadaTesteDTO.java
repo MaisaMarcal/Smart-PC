@@ -8,9 +8,7 @@ import lombok.Builder;
 public record BancadaTesteDTO(
     Long id,
     Integer numero,
-    Long vendaId,
-    String codigoVenda,
     LocalDateTime dataHoraEntrada,
-    LocalDateTime dataHoraSaida
+    LocalDateTime dataHoraSaida,
+    Long vendaId
 ) {}
-

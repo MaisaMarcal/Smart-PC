@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -47,10 +46,7 @@ public class ComputadorController {
         return ResponseEntity.ok(computadorService.atualizarComputadorPut(id, computadorDTO));
     }
     
-    @PatchMapping("/patch/{id}")
-    public ResponseEntity<ComputadorDTO> atualizarComputadorPatch(@PathVariable Long id, @RequestBody ComputadorDTO computadorDTO) {
-        return ResponseEntity.ok(computadorService.atualizarComputadorPatch(id, computadorDTO));
-    }
+
     // DELETE: Remover um registro [cite: 260]
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deletarComputador(@PathVariable Long id) {

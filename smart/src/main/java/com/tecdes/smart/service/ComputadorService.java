@@ -96,7 +96,8 @@ public class ComputadorService {
         return new ComputadorDTO(
                 pc.getId(),
                 pc.getNumero(),
-                pc.getVenda() != null ? pc.getVenda().getId() : null
+                pc.getVenda() != null ? pc.getVenda().getId() : null,
+                pc.getCodigoVenda()
         );
     }
 }

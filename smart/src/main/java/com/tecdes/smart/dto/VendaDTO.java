@@ -1,5 +1,10 @@
 package com.tecdes.smart.dto;
 
-public class VendaDTO {
-    
-}
+import java.util.List;
+
+public record VendaDTO(
+    Long id,
+    String codigoVenda,
+    Integer status,
+    List<Long> computadoresIds
+) {}
